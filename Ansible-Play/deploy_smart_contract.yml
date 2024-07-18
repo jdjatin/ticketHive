@@ -1,0 +1,34 @@
+---
+- name: Deploy Smart Contract to EKS
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: /usr/bin/python3  # Adjust this path if necessary
+  tasks:
+    - name: Create Kubernetes namespace
+      kubernetes.core.k8s:
+        api_version: v1
+        kind: Namespace
+        name: smart-contract
+        validate_certs: no
+      register: result
+    - name: Debug namespace creation
+      debug:
+        var: result
+
+    - name: Deploy Smart Contract
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', '../K8s-Configs/smart_contract_deployment.yml') }}"
+      register: result
+    - name: Debug deployment
+      debug:
+        var: result
+
+    - name: Expose Smart Contract Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', '../K8s-Configs/smart_contract_service.yml') }}"
+      register: result
+    - name: Debug service exposure
+      debug:
+        var: result

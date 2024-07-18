@@ -1,0 +1,13 @@
+{
+    "name": "solidity-smart-contract",
+    "version": "1.0.0",
+    "description": "Smart contract for ticketing",
+    "main": "truffle-config.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+      "truffle": "^5.4.17"
+    }
+  }
+  

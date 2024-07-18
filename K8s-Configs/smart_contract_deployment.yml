@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-contract
+  namespace: smart-contract
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smart-contract
+  template:
+    metadata:
+      labels:
+        app: smart-contract
+    spec:
+      containers:
+        - name: smart-contract
+          image: jatin1996/smart-contract:v2
+          ports:
+            - containerPort: 8545
+          env:
+            - name: ENV_VARIABLE
+              value: "value"
